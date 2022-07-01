@@ -11,6 +11,7 @@ import {styles} from './styles';
 import {request} from 'utils/interceptor';
 import {useQuery} from 'react-query';
 import Product from '../Product';
+import FastImage from 'react-native-fast-image';
 
 // Fetch data
 const fetchProducts = skip => {
@@ -84,6 +85,20 @@ export default () => {
       return;
     }
   };
+
+  // Empty list
+  const ListEmptyComponent = () => {
+    return (
+      <View style={styles.empty}>
+        <FastImage
+          style={styles.file}
+          source={require('assets/file.png')}
+          resizeMode={FastImage.resizeMode.contain}
+        />
+        <Text style={styles.noData}>No data available...</Text>
+      </View>
+    );
+  };
   return (
     <View style={styles.container}>
       <FlatList
@@ -96,6 +111,7 @@ export default () => {
         ListHeaderComponentStyle={styles.headerStlyes}
         contentContainerStyle={styles.content}
         ItemSeparatorComponent={ItemSeparatorComponent}
+        ListEmptyComponent={ListEmptyComponent}
         onEndReached={() => onEndReached()}
         onEndReachedThreshold={0.1}
       />

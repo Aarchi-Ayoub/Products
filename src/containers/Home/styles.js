@@ -46,4 +46,20 @@ export const styles = StyleSheet.create({
   separator: {
     height: 25,
   },
+  //
+  empty: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noData: {
+    fontSize: 25,
+    textAlign: 'center',
+    fontStyle: 'italic',
+    color: '#000',
+    fontWeight: 'bold',
+  },
+  file: {
+    height: 150,
+    width: 150,
+  },
 });
