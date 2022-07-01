@@ -4,7 +4,6 @@ import FastImage from 'react-native-fast-image';
 import styles from './styles';
 
 export default ({data}) => {
-  console.log(data);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{data?.title}</Text>
