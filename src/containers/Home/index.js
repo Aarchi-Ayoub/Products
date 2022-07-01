@@ -4,7 +4,6 @@ import {
   Text,
   ActivityIndicator,
   FlatList,
-  Touchable,
   TouchableOpacity,
 } from 'react-native';
 import {styles} from './styles';
