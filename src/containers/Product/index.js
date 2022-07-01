@@ -9,6 +9,7 @@ export default ({data, navigation}) => {
       onPress={() =>
         navigation.push('Details', {
           itemId: data?.id,
+          title: data?.title,
         })
       }
       style={styles.container}>

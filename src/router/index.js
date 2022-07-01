@@ -18,7 +18,11 @@ export default () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen
+          name="Details"
+          component={Details}
+          options={({route}) => ({headerTitle: route.params.title})}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
