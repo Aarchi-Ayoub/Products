@@ -1,17 +1,23 @@
 import React from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
-import {styles} from 'styles';
+import {View} from 'react-native';
+import {QueryClient, QueryClientProvider} from 'react-query';
 import Router from './router';
+import {styles} from 'styles';
 
-const index = () => {
+const queryClient = new QueryClient();
+
+if (__DEV__) {
+  import('react-query-native-devtools').then(({addPlugin}) => {
+    addPlugin({queryClient});
+  });
+}
+
+export default () => {
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <View>
-        <Text>index</Text>
-      </View> */}
-      <Router />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <QueryClientProvider client={queryClient}>
+        <Router />
+      </QueryClientProvider>
+    </View>
   );
 };
-
-export default index;
