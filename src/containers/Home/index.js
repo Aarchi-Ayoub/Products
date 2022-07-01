@@ -17,7 +17,7 @@ import FastImage from 'react-native-fast-image';
 const fetchProducts = skip => {
   return request({url: `/products?limit=10&skip=${skip}`});
 };
-export default () => {
+export default ({navigation}) => {
   // Local state
   const [skip, setSkip] = useState(0);
 
@@ -71,7 +71,7 @@ export default () => {
 
   // Product
   const renderItem = item => {
-    return <Product data={item} />;
+    return <Product data={item} navigation={navigation} />;
   };
 
   // Separator
