@@ -5,4 +5,45 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  //
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  error: {
+    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  //
+  header: {
+    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginTop: 22,
+  },
+  next: {
+    alignSelf: 'flex-end',
+  },
+  paginateActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  paginate: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    color: 'blue',
+    lineHeight: 17,
+  },
+  headerStlyes: {
+    marginBottom: '10%',
+  },
+  //
+  content: {
+    marginHorizontal: '4%',
+  },
+  separator: {
+    height: 25,
+  },
 });
