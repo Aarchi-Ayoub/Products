@@ -1,11 +1,17 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from './styles';
 
-export default ({data}) => {
+export default ({data, navigation}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.push('Details', {
+          itemId: data?.id,
+        })
+      }
+      style={styles.container}>
       <Text style={styles.title}>{data?.title}</Text>
       <View style={styles.row}>
         <FastImage
@@ -29,6 +35,6 @@ export default ({data}) => {
           resizeMode={FastImage.resizeMode.contain}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
