@@ -16,6 +16,9 @@ import Product from '../Product';
 // styles
 import {styles} from './styles';
 
+// custom query call
+import {useDeleteProduct} from 'api/useDeleteProduct';
+
 // Fetch data
 const fetchProducts = skip => {
   return request({url: `/products?limit=10&skip=${skip}`});
@@ -31,6 +34,8 @@ export default ({navigation}) => {
     () => fetchProducts(skip),
   );
 
+  const {mutate: deleteProduct} = useDeleteProduct();
+
   // Loading case
   if (isLoading) {
     return (
@@ -39,6 +44,7 @@ export default ({navigation}) => {
       </View>
     );
   }
+
   // Error case
   if (isError) {
     return (
@@ -87,6 +93,9 @@ export default ({navigation}) => {
       prevOpenedRow = row[index];
     };
     const renderLeftActions = () => {
+      const deleteAction = () => {
+        deleteProduct(item?.id);
+      };
       return (
         <TouchableOpacity
           onPress={() =>
@@ -99,7 +108,7 @@ export default ({navigation}) => {
                   onPress: () => console.log('Cancel Pressed'),
                   style: 'cancel',
                 },
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                {text: 'Delete', onPress: () => deleteAction()},
               ],
             )
           }
