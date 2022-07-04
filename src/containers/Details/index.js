@@ -137,14 +137,10 @@ export default props => {
       const {type, data} = arg;
       switch (type) {
         case 'call':
-          Linking.canOpenURL(data)
-            .then(res => res && Linking.openURL(`tel:${data}`))
-            .catch(err => console.log(err));
+          Linking.openURL(`tel:${data}`);
           break;
         case 'chat':
-          Linking.canOpenURL(data)
-            .then(res => res && Linking.openURL(`sms:${data}`))
-            .catch(err => console.log(err));
+          Linking.openURL(`sms:${data}`);
           break;
         case 'share':
           onShare();
