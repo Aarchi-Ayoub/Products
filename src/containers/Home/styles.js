@@ -62,4 +62,16 @@ export const styles = StyleSheet.create({
     height: 150,
     width: 150,
   },
+  //
+  swip: {
+    backgroundColor: 'gray',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    borderRadius: 8,
+  },
+  delete: {
+    height: 50,
+    width: 50,
+  },
 });

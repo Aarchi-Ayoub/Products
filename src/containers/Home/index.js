@@ -6,16 +6,20 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import {styles} from './styles';
 import {request} from 'utils/interceptor';
 import {useQuery} from 'react-query';
-import Product from '../Product';
 import FastImage from 'react-native-fast-image';
+import {Swipeable} from 'react-native-gesture-handler';
+// comp
+import Product from '../Product';
+// styles
+import {styles} from './styles';
 
 // Fetch data
 const fetchProducts = skip => {
   return request({url: `/products?limit=10&skip=${skip}`});
 };
+
 export default ({navigation}) => {
   // Local state
   const [skip, setSkip] = useState(0);
@@ -67,10 +71,31 @@ export default ({navigation}) => {
       </View>
     );
   };
-
   // Product
   const renderItem = item => {
-    return <Product data={item} navigation={navigation} />;
+    const renderLeftActions = () => {
+      return (
+        <TouchableOpacity onPress={() => {}} style={styles.swip}>
+          <FastImage
+            style={styles.delete}
+            source={require('assets/delete.png')}
+            resizeMode={FastImage.resizeMode.contain}
+          />
+        </TouchableOpacity>
+      );
+    };
+    return (
+      <Swipeable
+        key={item?.id}
+        friction={2}
+        leftThreshold={80}
+        onSwipeableOpen={() => {
+          console.log('Swipeable', item?.id);
+        }}
+        renderLeftActions={renderLeftActions}>
+        <Product data={item} navigation={navigation} />
+      </Swipeable>
+    );
   };
 
   // Separator
