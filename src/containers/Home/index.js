@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {request} from 'utils/interceptor';
 import {useQuery} from 'react-query';
@@ -71,11 +72,38 @@ export default ({navigation}) => {
       </View>
     );
   };
-  // Product
-  const renderItem = item => {
+
+  // Close previous helpers
+  let row = [];
+  let prevOpenedRow;
+
+  // Product item
+  const renderItem = ({item, index}) => {
+    // Close previous
+    const closeRow = index => {
+      if (prevOpenedRow && prevOpenedRow !== row[index]) {
+        prevOpenedRow.close();
+      }
+      prevOpenedRow = row[index];
+    };
     const renderLeftActions = () => {
       return (
-        <TouchableOpacity onPress={() => {}} style={styles.swip}>
+        <TouchableOpacity
+          onPress={() =>
+            Alert.alert(
+              'Delete item',
+              'Are you sur that you want to delete this item',
+              [
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ],
+            )
+          }
+          style={styles.swip}>
           <FastImage
             style={styles.delete}
             source={require('assets/delete.png')}
@@ -89,7 +117,9 @@ export default ({navigation}) => {
         key={item?.id}
         friction={2}
         leftThreshold={80}
+        ref={ref => (row[index] = ref)}
         onSwipeableOpen={() => {
+          closeRow(index);
           console.log('Swipeable', item?.id);
         }}
         renderLeftActions={renderLeftActions}>
@@ -129,7 +159,7 @@ export default ({navigation}) => {
         data={data.data?.products}
         extraData={data.data?.products}
         showsVerticalScrollIndicator={false}
-        renderItem={({item}) => renderItem(item)}
+        renderItem={item => renderItem(item)}
         keyExtractor={item => item?.id}
         ListHeaderComponent={HeaderComponent}
         ListHeaderComponentStyle={styles.headerStlyes}
